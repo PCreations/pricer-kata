@@ -8,9 +8,12 @@ export const pricer = ({
   taxes: number;
 }) => {
   let priceHT = articleCount * unitaryPrice;
-  if (priceHT > 1000) {
+  if (priceHT > 5000) {
+    priceHT = priceHT * 0.95;
+  } else if (priceHT > 1000) {
     priceHT = priceHT * 0.97;
   }
-  const finalPrice = priceHT + (taxes / 100) * priceHT;
+  let finalPrice = priceHT + (taxes / 100) * priceHT;
+  finalPrice = Math.round(finalPrice * 100) / 100;
   return `${finalPrice.toFixed(2)} €`;
 };
